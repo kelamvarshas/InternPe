@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My E-Commerce Site - Dresses & Shoes</title>
+    <style>
+        /* Embedded CSS for styling the e-commerce site */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDN8fHNob3BwaW5nfGVufDB8fHx8MTY0NzA3NDE5Nw&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6%;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Dropdown Menu Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        main {
+            padding: 2rem;
+            margin-top: 80px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            width: 80%;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            width: 200px;
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .product button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .product button:hover {
+            background-color: #218838;
+        }
+
+        #cartItems div {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            height: 2%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        form input, form button {
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        form button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My E-Commerce Site - Dresses & Shoes</h1>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li class="dropdown">
+                    <a href="#">Women's Collections</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#" onclick="showProducts('women', 'floral')">Women's Floral Dresses</a></li>
+                        <li><a href="#" onclick="showProducts('women', 'summer')">Women's Summer Dresses</a></li>
+                        <li><a href="#" onclick="showProducts('women', 'party')">Women's Party Dresses</a></li>
+                        <li><a href="#" onclick="showProducts('women', 'casual')">Women's Casual Dresses</a></li>
+                        <li><a href="#" onclick="showProducts('women', 'shoes')">Women's Shoes and heels</a></li>
+                        <li><a href="#" onclick="showProducts('women', 'home_slippers')">Women's Home Slippers</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Men's Collections</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#" onclick="showProducts('men', 'formal')">Men's Formal Wear</a></li>
+                        <li><a href="#" onclick="showProducts('men', 'casual')">Men's Casual Wear</a></li>
+                        <li><a href="#" onclick="showProducts('men', 'sports')">Men's Sports Wear</a></li>
+                        <li><a href="#" onclick="showProducts('men', 'shoes')">Men's Shoes</a></li>
+                        <li><a href="#" onclick="showProducts('men', 'home_slippers')">Men's Home Slippers</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="showCart()">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Page -->
+        <section id="home" class="page" style="text-align: center;">
+            <h2>Welcome to Our Fashion Boutique</h2>
+            <p>Discover our collection of beautiful dresses and shoes for women and men!</p>
+        </section>
+
+        <!-- Products Page -->
+        <section id="products" class="page" style="display:none;">
+            <h2 id="categoryTitle">Dresses & Shoes</h2>
+            <div class="product-list" id="productList">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <!-- Cart Page -->
+        <section id="cart" class="page" style="display:none;">
+            <h2>Your Cart</h2>
+            <div id="cartItems">
+                <!-- Cart items will be dynamically generated here -->
+            </div>
+            <button onclick="checkout()">Proceed to Checkout</button>
+        </section>
+
+        <!-- Checkout Page -->
+        <section id="checkout" class="page" style="display:none;">
+            <h1>Checkout</h1>
+            <form id="checkout-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+                <label for="credit-card">Credit Card:</label>
+                <input type="text" id="credit-card" name="credit-card" required>
+                <button type="submit">Submit Payment</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My E-Commerce Site - Dresses & Shoes. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Sample product data for women's and men's collections
+        const products = {
+            women: {
+                floral: [
+                    { name: 'Women Floral Dress 1', price: 3200, image: 'https://assets.ajio.com/medias/sys_master/root/20240406/as1C/6610dc7216fd2c6e6aa17936/-1117Wx1400H-466410399-white-MODEL.jpg' },
+                    { name: 'Women Floral Dress 2', price: 2750, image: 'https://m.media-amazon.com/images/I/910XwrivnrL.AC_UY1100.jpg' },
+                    { name: 'Women Floral Dress 3', price: 3990, image: 'https://alofi.in/cdn/shop/files/317A6187_12c5e342-802c-47ff-acf3-5dffbaa63869.jpg?v=1688024159' },
+                    { name: 'Women Floral Dress 4', price: 4500, image: 'https://m.media-amazon.com/images/I/61ZTajTEeUL._AC_UY1100_.jpg' },
+                    { name: 'Women Floral Dress 5', price: 3200, image: 'https://m.media-amazon.com/images/I/71b907qJx+L._AC_UY1100_.jpg' }
+                ],
+                summer: [
+                    { name: 'Women Summer Dress 1', price: 3500, image: 'https://images-cdn.ubuy.ae/65546202ca237565ee0b47ab-women-v-neck-three-quarter-sleeve-long.jpg' },
+                    { name: 'Women Summer Dress 2', price: 2900, image: 'https://i.pinimg.com/736x/62/58/88/625888deb6d2991e68be114e82fa7537.jpg' },
+                    { name: 'Women Summer Dress 3', price: 4100, image: 'https://images-cdn.ubuy.co.in/6371cdff0fe85c4ab50c6366-yokwi-summer-dress-female-summertime.jpg' },
+                    { name: 'Women Summer Dress 4', price: 2800, image: 'https://i.etsystatic.com/11657093/r/il/dd9024/2370762010/il_570xN.2370762010_kcbq.jpg' },
+                    { name: 'Women Summer Dress 5', price: 3300, image: 'https://www.beyoung.in/blog/wp-content/uploads/2020/05/jump-2-min-853x1024.jpg' }
+                ],
+                party: [
+                    { name: 'Women Party Dress 1', price: 4500, image: 'https://www.bullionknot.com/cdn/shop/files/179.jpg?v=1703304294&width=1200' },
+                    { name: 'Women Party Dress 2', price: 4700, image: 'https://media.shopkund.com/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/a/c/acu7621-4-teal-blue-embroidered-party-wear-saree-in-georgette-sr23295_2_.jpg' },
+                    { name: 'Women Party Dress 3', price: 4900, image: 'https://getsethappy.com/wp-content/uploads/2022/05/Pre-Stitched-Saree-with-cape.png' },
+                    { name: 'Women Party Dress 4', price: 5200, image: 'https://cygnusfashion.com/cdn/shop/products/1408_3_9b1baca0-b55f-4651-a3a2-91027eba2ee7.jpg?v=1623413497' },
+                    { name: 'Women Party Dress 5', price: 4300, image: 'https://cygnusfashion.com/cdn/shop/products/AG-7039_1.jpg?v=1623414276' }
+                ],
+                casual: [
+                    { name: 'Women Casual Dress 1', price: 2700, image: 'https://ml.thcdn.com/widgets/346-en/51/original-AW22_WK47_POS_WC_OTB_LADIES_005_1-091251.jpg' },
+                    { name: 'Women Casual Dress 2', price: 2500, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8pJTjVnuoNV5xkNFPrRc7s7iZlAaruGLAVw&s' },
+                    { name: 'Women Casual Dress 3', price: 2900, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ5FFljDN7gH4IroWYhyuugf-bgVvanZswkUmD_CAzlS-dQVrmU8jFXavQtx78E699DWE&usqp=CAU' },
+                    { name: 'Women Casual Dress 4', price: 3200, image: 'https://images.meesho.com/images/products/341597666/glkd3_256.webp' },
+                    { name: 'Women Casual Dress 5', price: 3100, image: 'https://static.fibre2fashion.com/MemberResources/LeadResources/1/2018/3/Seller/18142780/Images/18142780_0_ladies-casual-wear.jpg' }
+                ],
+                shoes: [
+                    { name: 'Women Shoe 1', price: 1500, image: 'https://5.imimg.com/data5/SELLER/Default/2023/12/365430631/LB/YJ/FA/6215968/casual-women-shoes.jpg' },
+                    { name: 'Women Shoe 2', price: 1700, image: 'https://i.pinimg.com/736x/41/a3/1b/41a31b6aa0f8f1625f8bb36eaf972803.jpg' },
+                    { name: 'Women Shoe 3', price: 1800, image: 'https://5.imimg.com/data5/SELLER/Default/2023/3/292961893/MD/WL/FO/182365761/women-casual-shallow-mouth-shoe-pointed-toe-shoe-working-flat-shoes.jpg' },
+                    { name: 'Women Shoe 4', price: 1900, image: 'https://i.ebayimg.com/images/g/ZkgAAOSwWDBkZlAh/s-l1200.webp' },
+                    { name: 'Women Shoe 5', price: 2000, image: 'https://www.jiomart.com/images/product/original/rvryqdmtyd/uunda-fashion-women-and-girls-fancy-stylish-wedges-heel-sandals-for-women-black-product-images-rvryqdmtyd-0-202305081337.jpg?im=Resize=(1000,1000)' }
+
+                ],
+                home_slippers: [
+                    { name: 'Women Slipper 1', price: 1500, image: 'https://5.imimg.com/data5/SELLER/Default/2021/7/SW/PH/LS/4555453/soft-flip-flip-home-slippers-for-man-women.jpg' },
+                    { name: 'Women Slipper 2', price: 1700, image: 'https://rukminim2.flixcart.com/image/850/1000/xif0q/slipper-flip-flop/l/p/s/7-women-s-home-slippers-mifuzi-dusty-pink-original-imagvfsfqrkbztz7.jpeg?q=90&crop=false' },
+                    { name: 'Women Slipper 3', price: 1800, image: 'https://rukminim2.flixcart.com/image/850/1000/xif0q/slipper-flip-flop/o/m/h/-original-imaggewy5ypvmu4f.jpeg?q=90&crop=false' },
+                    { name: 'Women Slipper 4', price: 1900, image: 'https://i5.walmartimages.com/seo/House-Slippers-Open-Toe-for-Women-Breathable-Cozy-Anti-kid-Warm-Slipper-for-Women-Crisscross-Slippers-Indoor-Outdoor-House-Slippers-Pink-11-12_378f7af6-3594-466b-baae-f98b89b92a6f.dbdfb003f19b21f23c2447ac4c54cb52.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF' },
+                    { name: 'Women Slipper 5 indoor winter', price: 2000, image: 'https://5.imimg.com/data5/ECOM/Default/2023/9/346148033/SB/JY/YW/196158148/3c1bfe9783a724e7ee4be46b76e7df48-500x500.jpg' },
+                    { name: 'Women Slipper 6 indoor winter', price: 3000, image: 'https://m.media-amazon.com/images/I/41hogIjUWCL._AC_SY300_QL15_.jpg' },
+                    { name: 'Women Slipper 7 foot massage', price: 5000, image: 'https://rukminim2.flixcart.com/image/850/1000/xif0q/slipper-flip-flop/t/a/o/8-9019-mahadev-enterprises-brown-original-imagmgx5xzwtbfke.jpeg?q=20&crop=false' }
+
+                ]
+            },
+            men: {
+                formal: [
+                    { name: 'Men Formal Suit 1', price: 5800, image: 'https://i.etsystatic.com/36064523/r/il/7ba465/4175024522/il_fullxfull.4175024522_n5zx.jpg' },
+                    { name: 'Men Formal Suit 2', price: 6200, image: 'https://qph.cf2.quoracdn.net/main-qimg-47f9f1dacba580563af61dd3a31098cc-lq' },
+                    { name: 'Men Formal Suit 3', price: 6100, image: 'https://images.bewakoof.com/utter/content/4596/content_Suit_Men_Cocktail_dress_-_Bewakoof_Blog.jpg' },
+                    { name: 'Men Formal Suit 4', price: 5900, image: 'https://i.etsystatic.com/26295509/r/il/9417d3/3915032639/il_fullxfull.3915032639_ryu1.jpg' },
+                    { name: 'Men Formal Suit 5', price: 6500, image: 'https://ahlabuy.com/img/p/9/4/7/6/1/8/947618-large_default.jpg' }
+                ],
+                casual: [
+                    { name: 'Men Casual Shirt 1', price: 1500, image: 'https://i.pinimg.com/564x/4a/4a/9e/4a4a9e78410f8257e2477e955a0dc141.jpg' },
+                    { name: 'Men Casual Shirt 2', price: 1800, image: 'https://i.pinimg.com/736x/85/f1/5b/85f15b0b754a962d691d9e051ed1cbca.jpg' },
+                    { name: 'Men Casual Shirt 3', price: 1700, image: 'https://media.fashonation.com/wp-content/uploads/2022/12/25105016/Classic-White-T-shirts-Bewakoof-Blog-1-1604989071.jpg' },
+                    { name: 'Men Casual Shirt 4', price: 1600, image: 'https://blog.g3fashion.com/wp-content/uploads/2021/06/Mens-Casual-Outing-Style.jpg' },
+                    { name: 'Men Casual Shirt 5', price: 2000, image: 'https://www.thelostgentleman.co.uk/wp-content/uploads/2018/08/summer-smart-casual-5-504x630.jpg' }
+                ],
+                sports: [
+                    { name: 'Men Sports Jersey 1', price: 1200, image: 'https://static.fibre2fashion.com/MemberResources/LeadResources/1/2019/6/Seller/19164890/Images/19164890_0_men-s-sports-wear.jpg' },
+                    { name: 'Men Sports Jersey 2', price: 1500, image: 'https://tiimg.tistatic.com/fp/1/007/721/cotton-black-colour-cricket-mens-sportswear-for-adults-with-good-quality-comfortable-636.jpg' },
+                    { name: 'Men Sports Jersey 3', price: 1300, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-S0ERgBFyaaCkG59o3Z3r6G7XgXsaGMVYM-3xPvraVHA_jyRzVDod2JYTaOm6fyOJCr8&usqp=CAU' },
+                    { name: 'Men Sports Jersey 4', price: 1400, image: 'https://static.fibre2fashion.com/MemberResources/LeadResources/1/2017/7/Seller/17130652/Images/17130652_0_nly-man-ss15-sportswear-017.jpg' },
+                    { name: 'Men Sports Jersey 5', price: 1700, image: 'https://5.imimg.com/data5/SELLER/Default/2020/10/QG/WI/YA/111078039/clq-9508-jpg.jpg' }
+                ],
+                shoes: [
+                    { name: 'Men Shoe 1 sports ', price: 2500, image: 'https://rukminim2.flixcart.com/image/450/500/xif0q/shoe/r/e/m/-original-imagsfdvuffvqx4x.jpeg?q=90&crop=false' },
+                    { name: 'Men Shoe 2', price: 2700, image: 'https://images.meesho.com/images/products/117525185/t8xwx_512.jpg' },
+                    { name: 'Men Shoe 3', price: 2800, image: 'https://images-cdn.ubuy.co.in/649c01c0335bdf37256e0f79-yotami-mens-shoes-outwear-new-deals.jpg' },
+                    { name: 'Men Shoe 3', price: 3000, image: 'https://baccabucci.com/cdn/shop/products/2_b6063c98-1b3c-4978-82e0-a1fdc184775b_1200x.jpg?v=1643794621' },
+                    { name: 'Men Shoe 3', price: 3500, image: 'https://img.ltwebstatic.com/images3_spmp/2023/06/26/16877660708e7aedc152283438c9c8021590d60b7d_thumbnail_720x.webp' }
+                ],
+                home_slippers: [
+                    { name: 'Men Slipper 1', price: 1500, image: 'https://www.7mart.shop/cdn/shop/files/O1CN012izULI1DQDuTtyvZW__2816880210-0-cib.jpg?v=1688890213&width=416' },
+                    { name: 'Men Slipper 2', price: 1700, image: 'https://images-na.ssl-images-amazon.com/images/I/51-siCi+GwL._SL500_._AC_SL500_.jpg' },
+                    { name: 'Men Slipper 3', price: 1800, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9cBNyPY1k7foOJqsd8N8syVrJbhDhLZVArQ&s' },
+                    { name: 'Men Slipper 4 ', price: 1900, image: 'https://s.alicdn.com/@sc04/kf/H193f8aea239a4c6e85cca26e0dc82444Q.jpg_300x300.jpg' },
+                    { name: 'Men Slipper 5 indoor winter', price: 2000, image: 'https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/cf839e93493f33e664c8f12a1bf65a17.jpg?imageView2/2/w/500/q/60/format/webp' },
+                    { name: 'Men Slipper 6 indoor winter', price: 4000, image: 'https://m.media-amazon.com/images/I/71Q5ZpRPLZL._AC_UY1000_.jpg' },
+                    { name: 'Men Slipper 7 foot massage', price: 6000, image: 'https://images-na.ssl-images-amazon.com/images/I/71vDiBOIwOL.jpg' }
+
+                ]
+            }
+        };
+
+        // Current cart items
+        let cart = [];
+
+        // Function to display products based on category
+        function showProducts(gender, category) {
+            const productList = document.getElementById('productList');
+            const categoryTitle = document.getElementById('categoryTitle');
+            const selectedProducts = products[gender][category];
+
+            productList.innerHTML = '';
+            categoryTitle.innerText = `${gender.charAt(0).toUpperCase() + gender.slice(1)} ${category.charAt(0).toUpperCase() + category.slice(1)}`;
+
+            selectedProducts.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+
+                productDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>Price: Rs.${product.price}</p>
+                    <button onclick="addToCart('${gender}', '${category}', '${product.name}')">Add to Cart</button>
+                `;
+
+                productList.appendChild(productDiv);
+            });
+
+            showPage('products');
+        }
+
+        // Function to switch pages
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.style.display = 'none';
+            });
+
+            document.getElementById(pageId).style.display = 'block';
+        }
+
+        // Function to add product to cart
+        function addToCart(gender, category, productName) {
+            const selectedProducts = products[gender][category];
+            const product = selectedProducts.find(p => p.name === productName);
+            if (product) {
+                cart.push(product);
+                alert(`${productName} has been added to your cart!`);
+            }
+        }
+
+        // Function to show cart page
+        function showCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                cart.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.innerHTML = `
+                        <p>${item.name} - Rs.${item.price}</p>
+                    `;
+                    cartItems.appendChild(itemDiv);
+                });
+            }
+
+            showPage('cart');
+        }
+
+        // Function to handle checkout
+        function checkout() {
+            showPage('checkout');
+        }
+
+        // Handle form submission for checkout
+        document.getElementById('checkout-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Payment processed successfully!');
+            cart = []; // Clear the cart after successful payment
+            showPage('home');
+        });
+
+        // Initially show the home page
+        showPage('home');
+    </script>
+</body>
+</html>
